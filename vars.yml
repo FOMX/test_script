@@ -1,2 +1,2 @@
-load: "56.2"
+load: "dev"
 database_name: "production_db"
