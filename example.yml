@@ -1,7 +1,12 @@
 ---
 - hosts: all
-  gather_facts: true
+  become: yes
+
   tasks:
-    - name: Print hostname and IP
-      debug:
-        msg: "Hostname: {{ ansible_hostname }}, IP Address: {{ ansible_default_ipv4.address }}"
+  - name: Ensure chrony (for time synchronization) is installed.
+    dnf:
+      name: chrony
+      state: present
+
+  - name: Ensure chrony is running.
+    service:
