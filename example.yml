@@ -1,17 +1,17 @@
 ---
 - hosts: all
   become: yes
-  vars_files:
-  - vars.yml
-
-  tasks:
-  - name: Print variables from vars_files
-    ansible.builtin.debug:
-      msg: "load: {{ load }}, Database: {{ database_name }}"
   
+  tasks:
   - name: Print variables from cli
     ansible.builtin.debug:
-      msg: "load: {{ load_cli }}, Database: {{ database_name_cli }}"
+      msg: "load: {{ load }}"
+
+  - name: Clone sometags repo
+    ansible.builtin.git: 
+      repo: https://github.com/FOMX/just_some_tags.git
+      dest: /tmp/checkout
+      version: "{{ load }}"
 
   - name: Ensure chrony (for time synchronization) is installed.
     ansible.builtin.apt:
