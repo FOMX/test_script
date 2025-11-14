@@ -9,6 +9,10 @@
     ansible.builtin.debug:
       msg: "load: {{ load }}, Database: {{ database_name }}"
   
+  - name: Print variables from cli
+    ansible.builtin.debug:
+      msg: "load: {{ load_cli }}, Database: {{ database_name_cli }}"
+
   - name: Ensure chrony (for time synchronization) is installed.
     ansible.builtin.apt:
       name: chrony
