@@ -1,8 +1,14 @@
 ---
 - hosts: all
   become: yes
+  vars_files:
+  - vars.yml
 
   tasks:
+  - name: Print variables from vars_files
+    ansible.builtin.debug:
+      msg: "load: {{ load }}, Database: {{ database_name }}"
+  
   - name: Ensure chrony (for time synchronization) is installed.
     ansible.builtin.apt:
       name: chrony
@@ -13,3 +19,4 @@
       name: chronyd
       state: started
       enabled: yes
+  
